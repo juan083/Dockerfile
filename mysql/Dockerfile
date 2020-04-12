@@ -1,82 +1,68 @@
-FROM debian:buster-slim
+# 创建基于centos的MySQL镜像
 
-# add our user and group first to make sure their IDs get assigned consistently, regardless of whatever dependencies get added
-RUN groupadd -r mysql && useradd -r -g mysql mysql
+# 基础镜像
+FROM centos:latest
 
-RUN apt-get update && apt-get install -y --no-install-recommends gnupg dirmngr && rm -rf /var/lib/apt/lists/*
+# 维护者信息
+MAINTAINER juan083@163.com
 
-# add gosu for easy step-down from root
-ENV GOSU_VERSION 1.7
-RUN set -x \
-	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
-	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
-	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
-	&& export GNUPGHOME="$(mktemp -d)" \
-	&& gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
-	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
-	&& gpgconf --kill all \
-	&& rm -rf "$GNUPGHOME" /usr/local/bin/gosu.asc \
-	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true \
-	&& apt-get purge -y --auto-remove ca-certificates wget
+# 指定环境变量
+ENV TIME_ZOME Asia/Shanghai
 
-RUN mkdir /docker-entrypoint-initdb.d
+# 定义创建镜像过程中使用的变量
+# 在执行docker build时，可以通过--build-arg[=]来为变量赋值覆盖ARG。多个值 --build-arg a=1 --build-arg b=2
+# 当镜像编译成功后，ARG指定的变量将不再存在
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-# for MYSQL_RANDOM_ROOT_PASSWORD
-		pwgen \
-# for mysql_ssl_rsa_setup
-		openssl \
-# FATAL ERROR: please install the following Perl modules before executing /usr/local/mysql/scripts/mysql_install_db:
-# File::Basename
-# File::Copy
-# Sys::Hostname
-# Data::Dumper
-		perl \
-# install "xz-utils" for .sql.xz docker-entrypoint-initdb.d files
-		xz-utils \
-	&& rm -rf /var/lib/apt/lists/*
+# php下载链接()
+ARG DOWNLOAD_URL="https://cdn.mysql.com/archives/mysql-5.7/mysql-5.7.28-linux-glibc2.12-x86_64.tar.gz"
+ARG PREFIX_PATH="/usr/local/mysql"
+ARG TMP_PATH="/tmp/mysql/"
 
-RUN set -ex; \
-# gpg: key 5072E1F5: public key "MySQL Release Engineering <mysql-build@oss.oracle.com>" imported
-	key='A4A9406876FCBD3C456770C88C718D3B5072E1F5'; \
-	export GNUPGHOME="$(mktemp -d)"; \
-	gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
-	gpg --batch --export "$key" > /etc/apt/trusted.gpg.d/mysql.gpg; \
-	gpgconf --kill all; \
-	rm -rf "$GNUPGHOME"; \
-	apt-key list > /dev/null
+# 镜像操作 开始...
 
-ENV MYSQL_MAJOR 5.7
-ENV MYSQL_VERSION 5.7.29-1debian10
+# 添加内容到镜像，在当前路径添加tar.gz包
+# ADD $PV.tar.gz /tmp
 
-RUN echo "deb http://repo.mysql.com/apt/debian/ buster mysql-${MYSQL_MAJOR}" > /etc/apt/sources.list.d/mysql.list
+# 运行指定命令
+RUN groupadd mysql && useradd -r -g www -s /bin/false mysql \
+    && mkdir -p ${TMP_PATH} \
+    && cd ${TMP_PATH} \
+    && yum -y install gcc gcc-c++ make \
+    && curl -O ${DOWNLOAD_URL} \
+    && filename_list=(${DOWNLOAD_URL//\// }) \
+    && tar_file=${filename_list[-1]} \
+    && tar -zxvf ${tar_file} \
+    && filename=(${tar_file//./ }) \
+    && rm -rf ${tar_file} \
+    && cd ./${filename}* \
+    && ./configure  --prefix=${PREFIX_PATH} \
+    --with-http_ssl_module --with-http_v2_module --with-http_realip_module \
+    --with-http_geoip_module --with-http_geoip_module=dynamic \
+    --with-http_gzip_static_module --without-http_gzip_module \
+    --without-http_proxy_module --without-http_rewrite_module \
+    --without-http_fastcgi_module --with-http_stub_status_module --with-pcre \
+    && make \
+    && make install \
+    && echo "${TIME_ZOME}" > /etc/timezone \
+    && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime \
+    && rm -rf ${TMP_PATH} \
+    && yum clean all \
+    && yum -y remove gcc gcc-c++ make
 
-# the "/var/lib/mysql" stuff here is because the mysql-server postinst doesn't have an explicit way to disable the mysql_install_db codepath besides having a database already "configured" (ie, stuff in /var/lib/mysql/mysql)
-# also, we set debconf keys to make APT a little quieter
-RUN { \
-		echo mysql-community-server mysql-community-server/data-dir select ''; \
-		echo mysql-community-server mysql-community-server/root-pass password ''; \
-		echo mysql-community-server mysql-community-server/re-root-pass password ''; \
-		echo mysql-community-server mysql-community-server/remove-test-db select false; \
-	} | debconf-set-selections \
-	&& apt-get update && apt-get install -y mysql-server="${MYSQL_VERSION}" && rm -rf /var/lib/apt/lists/* \
-	&& rm -rf /var/lib/mysql && mkdir -p /var/lib/mysql /var/run/mysqld \
-	&& chown -R mysql:mysql /var/lib/mysql /var/run/mysqld \
-# ensure that /var/run/mysqld (used for socket and lock files) is writable regardless of the UID our mysqld instance ends up having at runtime
-	&& chmod 777 /var/run/mysqld \
-# comment out a few problematic configuration values
-	&& find /etc/mysql/ -name '*.cnf' -print0 \
-		| xargs -0 grep -lZE '^(bind-address|log)' \
-		| xargs -rt -0 sed -Ei 's/^(bind-address|log)/#&/' \
-# don't reverse lookup hostnames, they are usually another container
-	&& echo '[mysqld]\nskip-host-cache\nskip-name-resolve' > /etc/mysql/conf.d/docker.cnf
+# 镜像操作 结束...
 
-VOLUME /var/lib/mysql
+# 配置工作目录
+# 为后续的RUN CMD ENTRYPOINT指定配置工作目录，可以使用多个WORKDIR指令，若后续指令用得是相对路径，则会基于之前的命令指定路径。
+WORKDIR ${PATH}
 
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN ln -s usr/local/bin/docker-entrypoint.sh /entrypoint.sh # backwards compat
-ENTRYPOINT ["docker-entrypoint.sh"]
+# 声明镜像内服务监听的端口
+# 格式为 EXPOSE port [port2,port3,...]，例如EXPOSE 80这条指令告诉Docker服务器暴露80端口，供容器外部连接使用
+# 在启动容器的使用使用-P(大写)，P为自动映射，会将EXPOSE暴露出来的端口随机映射到宿主机的端口上，如果没有暴露端口，就不会有映射
+# 使用-p(小写)可以具体指定使用哪个本地的端口来映射对外开放的端口，如：-p 80:80，-p [宿主机端口]：[容器端口]
+EXPOSE 80 443 8080 90
 
-EXPOSE 3306 33060
-CMD ["mysqld"]
+# 指定容器运行时的用户名或UID，后续的RUN也会使用指定的用户。要临时使用管理员权限可以使用sudo。
+USER www
+
+# 容器启动时执行指令
+CMD ["sbin/nginx"]

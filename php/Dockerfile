@@ -1,3 +1,5 @@
+# 创建基于centos的php7镜像
+
 # 基础镜像
 FROM centos:latest
 
