@@ -21,6 +21,8 @@ RUN groupadd www && useradd -r -g www -s /bin/false www \
     && sed -i 's/apache/www/g' /etc/php-fpm.d/www.conf \
     && yum clean all \
     && yum -y remove gcc gcc-c++ make
+    && echo "${TIME_ZOME}" > /etc/timezone \
+    && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime \
 
 # 声明镜像内服务监听的端口
 # 格式为 EXPOSE port [port2,port3,...]，例如EXPOSE 80这条指令告诉Docker服务器暴露80端口，供容器外部连接使用

@@ -1,7 +1,7 @@
 # 创建基于centos的php7镜像
 
 # 基础镜像
-FROM centos:latest
+FROM centos:7
 
 # 维护者信息
 MAINTAINER juan083@163.com
