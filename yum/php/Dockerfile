@@ -10,7 +10,8 @@ MAINTAINER juan083@163.com
 ENV TIME_ZOME Asia/Shanghai
 
 # pecl search xxx, pecl install xxx
-RUN groupadd www && useradd -r -g www -s /bin/false www \
+RUN groupadd www \
+    && useradd -r -g www -s /bin/false www \
     && yum install -y epel-release \
     && yum -y install gcc gcc-c++ make \
     && rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm \

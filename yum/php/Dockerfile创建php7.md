@@ -1,4 +1,4 @@
-Dockerfile创建php7Dockerfile创建php7Dockerfile创建php7
+Dockerfile创建php7
 ====
 
 配置项 | 值  
@@ -16,12 +16,12 @@ docker build -t php72-centos7 .
 
 #### 启动容器
 ```
-docker run -dit php72-centos7 /bin/bash
+docker run --name php72 -dit php72-centos7 /bin/bash
 ```
 
 #### 进入容器
 ```
-docker exec -it xxxxxxx /bin/bash
+docker exec -it php72 /bin/bash
 ```
 
 #### 本镜像已安装的扩展
