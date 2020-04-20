@@ -9,7 +9,7 @@ yum remove docker \
                   docker-logrotate \
                   docker-engine
 
-yum update
+yum update -y
 
 yum install -y yum-utils \
   device-mapper-persistent-data \
@@ -30,3 +30,5 @@ chmod +x /usr/local/bin/docker-compose
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 docker-compose -v
+
+docker pull centos:7

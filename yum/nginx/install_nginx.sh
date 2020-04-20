@@ -18,6 +18,7 @@ docker build -t nginx1.16-centos7 .
 
 echo "[step 3]docker run container......"
 docker run --name nginx1.16  \
+--privileged=true \
 -p 80:80 \
 -p 90:90 \
 -p 443:443 \
