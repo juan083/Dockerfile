@@ -16,12 +16,12 @@ docker build -t nginx1.16-centos7 .
 
 #### 启动容器
 ```
-docker run --name nginx116 -dit nginx1.16-centos7
+docker run --name nginx1.16 -dit nginx1.16-centos7
 ```
 
 #### 进入容器
 ```
-docker exec -it nginx116 /bin/bash
+docker exec -it nginx1.16 /bin/bash
 ```
 
 #### 已安装的nginx详情
