@@ -1,25 +1,18 @@
 #!/bin/bash
 
-echo "[step 1]make directory......"
-mkdir -p /etc/redis/
+cp -rf ./etc/ /etc/
 
-还差一个日志的路径
+mkdir -p /usr/local/redis/src/
 
-chmod -R 777 /etc/redis/
+cp ./src/redis-cli /usr/local/redis/src/
 
+docker build -t redis5-centos7 ../
 
-
-echo "[step 2]docker build image......"
-docker build -t redis5-centos7 .
-
-echo "[step 3]docker run container......"
 docker run --name redis5  \
 -p 6379:6379 \
--p 6380:6380 \
 -v /etc/redis/:/etc/redis/:ro \
--v /usr/local/redis:/usr/local/redis \
+-v /var/log/redis/:/var/log/redis/ \
 -d redis5-centos7
 
-echo "[end]......"
 docker images
 docker ps -a

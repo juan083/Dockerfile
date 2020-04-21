@@ -7,6 +7,9 @@ Dockerfile创建nginx1.16
 nginx版本 | 1.16
 nginx配置 | `/etc/nginx/nginx.conf`
 nginx配置 | `/etc/nginx/conf.d/*.conf`
+访问日志 | `/var/log/nginx/access.log`
+错误日志 | `/var/log/nginx/error.log`
+web项目 | `/var/www/` 
 
 
 #### 创建镜像

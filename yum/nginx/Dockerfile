@@ -12,10 +12,6 @@ ENV TIME_ZOME Asia/Shanghai
 RUN groupadd www && useradd -r -g www -s /bin/false www \
     && echo -e '[nginx]\nname=nginx repo\nbaseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\ngpgcheck=0\nenabled=1' >> /etc/yum.repos.d/nginx.repo \
     && yum -y install nginx \
-    && sed -i 's/user  nginx;/user  www;/g' /etc/nginx/nginx.conf \
-    && sed -i 's/worker_processes  1;/worker_processes  4;/g' /etc/nginx/nginx.conf \
-    && rm -rf /etc/nginx/modules \
-    && cp -rf /usr/lib64/nginx/modules /etc/nginx/ \
     && echo "${TIME_ZOME}" > /etc/timezone \
     && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime
 

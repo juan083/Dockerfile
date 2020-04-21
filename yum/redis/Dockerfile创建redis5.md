@@ -16,7 +16,7 @@ docker build -t redis5-centos7 .
 
 #### 启动容器
 ```
-docker run --name redis5 -p 6379:6379 -p 6380:6380 -dit redis5-centos7
+docker run --name redis5 -p 6379:6379 -dit redis5-centos7
 ```
 
 #### 进入容器
@@ -28,4 +28,15 @@ docker exec -it redis5 /bin/bash
 配置项 | 值  
 -|-
 DOWNLOAD_URL | 下载链接，默认`http://download.redis.io/releases/redis-5.0.8.tar.gz`
-REDIS_PW | redis密码，默认`123456`
+
+#### 修改redis配置/etc/redis/redis.conf
+##### 外网可以访问
+`protected-mode yes` 改成 `protected-mode no`
+
+`bind 127.0.0.1` 改成 `#bind 127.0.0.1`
+
+##### 增加redis的密码
+增加`requirepass 123456`
+
+##### 修改redis的日志
+`logfile ""` 修改 `logfile "/var/log/redis/redis.log"`
