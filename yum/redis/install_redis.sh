@@ -16,8 +16,8 @@ echo "[step 3]docker run container......"
 docker run --name redis5  \
 -p 6379:6379 \
 -p 6380:6380 \
--v /etc/redis/:/etc/redis/:rw \
-
+-v /etc/redis/:/etc/redis/:ro \
+-v /usr/local/redis:/usr/local/redis \
 -d redis5-centos7
 
 echo "[end]......"

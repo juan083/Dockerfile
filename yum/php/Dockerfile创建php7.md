@@ -7,7 +7,9 @@ Dockerfile创建php7
 php版本 | php7.2
 php配置 | /etc/php.int
 fpm配置 | /etc/php-fpm.conf
-php扩展 | /etc/php.d
+php扩展 | /etc/php.d/
+fpm | /etc/php-fpm.d/
+log | /var/log/php-fpm/
 
 #### 创建镜像
 ```
@@ -16,7 +18,7 @@ docker build -t php72-centos7 .
 
 #### 启动容器
 ```
-docker run --name php72 -dit php72-centos7 /bin/bash
+docker run --name php72 -p 9000:9000 -dit php72-centos7 /bin/bash
 ```
 
 #### 进入容器

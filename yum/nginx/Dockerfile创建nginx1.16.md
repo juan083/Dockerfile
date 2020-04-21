@@ -6,7 +6,7 @@ Dockerfile创建nginx1.16
 系统 | centos7
 nginx版本 | 1.16
 nginx配置 | `/etc/nginx/nginx.conf`
- - | `/etc/nginx/conf.d/*.conf`
+nginx配置 | `/etc/nginx/conf.d/*.conf`
 
 
 #### 创建镜像
