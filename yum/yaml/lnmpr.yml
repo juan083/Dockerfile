@@ -1,18 +1,52 @@
 version: '3'
 services:
-  nginx116:
-    image: nginx116
-    tty: true
-    network_mode: "host"
-    container_name: "nginx116"
-    ports:
-      - "80:80"
-      - "90:90"
-      - "443:443"
-      - "8080:8080"
-    volumes:
-      - /var/www:/var/www:rw
-      - /var/log/nginx/:/var/log/nginx:rw
-      - /etc/nginx/:/var/nginx/:rw
-    restart: always
-    command: nginx -g "daemon off;"
+    nginx1.16:
+        image: nginx1.16-centos7
+        network_mode: "host"
+        container_name: "nginx1.16"
+        ports:
+          - "80:80"
+          - "90:90"
+          - "443:443"
+          - "8080:8080"
+        volumes:
+          - /var/www:/var/www/
+          - /var/log/nginx/:/var/log/nginx/
+          - /etc/nginx/:/etc/nginx/:ro
+        command: nginx -g "daemon off;"
+    php72:
+        image:php72-centos7
+        network_mode: "host"
+        container_name: "php72"
+        ports:
+          - "9000:9000"
+        volumes:
+          - /etc/php.int:/etc/php.int:ro
+          - /etc/php.d/:/etc/php.d/:ro
+          - //etc/php-fpm.conf:/etc/php-fpm.conf:ro
+          - /etc/php-fpm.d/:/etc/php-fpm.d/:ro
+          - /var/log/php-fpm/:/var/log/php-fpm/
+        command: php-fpm
+    redis5:
+        image: redis5-centos7
+        network_mode: "host"
+        container_name: "redis5"
+        ports:
+          - "6379:6379"
+          - "6380:6380"
+        volumes:
+          - /etc/redis/:/etc/redis/:ro
+          - /var/log/redis/:/var/log/redis/
+        command: /usr/local/redis/src/redis-server /etc/redis/redis.conf
+    mysql8:
+        image: mysql8-centos7
+        network_mode: "host"
+        container_name: "mysql8"
+        ports:
+          - "3306:3306"
+        volumes:
+          - /var/lib/mysql:/var/lib/mysql
+          - /var/log/mysqld.log:/var/log/mysqld.log
+          - /etc/my.cnf:/etc/my.cnf:ro
+          - /etc/my.cnf.d/:/etc/my.cnf.d/:ro
+        command: mysqld
