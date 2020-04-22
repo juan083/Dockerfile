@@ -32,8 +32,6 @@ RUN groupadd www && useradd -r -g www -s /bin/false www \
   && yum clean all \
   && yum -y remove gcc gcc-c++ make
 
-#WORKDIR ${REDIS_PATH}"/src/redis-server"
-
 # 声明镜像内服务监听的端口
 # 格式为 EXPOSE port [port2,port3,...]，例如EXPOSE 80这条指令告诉Docker服务器暴露80端口，供容器外部连接使用
 # 在启动容器的使用使用-P(大写)，P为自动映射，会将EXPOSE暴露出来的端口随机映射到宿主机的端口上，如果没有暴露端口，就不会有映射

@@ -5,11 +5,11 @@ Dockerfile创建php7
 -|-
 系统 | centos7
 php版本 | php7.2
-php配置 | /etc/php.int
-php扩展 | /etc/php.d/
-fpm配置 | /etc/php-fpm.conf
-fpm配置 | /etc/php-fpm.d/
-log | /var/log/php-fpm/
+php配置 | `/etc/php.int`
+php扩展 | `/etc/php.d/`
+fpm配置 | `/etc/php-fpm.conf`
+fpm配置 | `/etc/php-fpm.d/`
+log | `/var/log/php-fpm/`
 
 #### 创建镜像
 ```
