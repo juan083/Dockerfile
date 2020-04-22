@@ -1,6 +1,14 @@
 #!/bin/bash
 
-sh ./redis/install/install_redis.sh
-sh ./php/install/install_php.sh
-sh ./nginx/install/install_nginx.sh
-#sh ./mysql/install/install_mysql
+cd ./redis/install
+sh ./install_redis.sh
+
+cd ./php/install
+sh ./install_php.sh
+
+cd ./nginx/install
+sh ./install_nginx.sh
+
+cd ./mysql/install
+sh ./install_mysql.sh
+
