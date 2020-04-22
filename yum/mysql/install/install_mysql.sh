@@ -1,19 +1,30 @@
 #!/bin/bash
 
-cp -rf ./etc/ /etc/
+image_name="mysql8-centos7"
+container_name="mysql8"
 
-docker build -t nginx1.16-centos7 .
+flag=$(docker images | grep ${image_name})
+if [ -z "${flag}" ]; then
+    docker build -t ${image_name} .
+else
+    echo "image [${image_name}] is exist"
+fi
 
-docker run --name nginx1.16  \
---privileged=true \
--p 80:80 \
--p 90:90 \
--p 443:443 \
--p 8080:8080 \
--v /var/www/:/var/www/ \
--v /var/log/nginx/:/var/log/nginx/ \
--v /etc/nginx/:/etc/nginx/:ro \
--d nginx1.16-centos7
+flag=$(docker ps -a | grep ${container_name})
+if [ -z "${flag}" ]; then
+    cp -rf ./etc/ /
+
+    docker run --name ${container_name} \
+        --privileged=true \
+        -p 3306:3306 \
+        -v /var/lib/mysql:/var/lib/mysql:rw \
+        -v /var/log/mysqld.log:/var/log/mysqld.log \
+        -v /etc/my.cnf:/etc/my.cnf \
+        -v /etc/my.cnf.d/:/etc/my.cnf.d/ \
+        -d ${image_name}
+else
+    echo "container [${container_name}] is exist"
+fi
 
 echo "[end]......"
 docker images
