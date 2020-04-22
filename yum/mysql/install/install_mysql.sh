@@ -29,3 +29,4 @@ fi
 echo "[end]......"
 docker images
 docker ps -a
+
