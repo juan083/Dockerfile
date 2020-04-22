@@ -2,7 +2,12 @@
 
 cp -rf ./etc/ /etc/
 
-docker build -t nginx1.16-centos7 .
+image_name=`docker images | grep "nginx1.16-centos7" | awk '{print $1}'`
+if [ ! -n "$image_name" ]; then
+    docker build -t nginx1.16-centos7 .
+fi
+
+cp -rf ./etc/ /etc
 
 docker run --name nginx1.16  \
 --privileged=true \
