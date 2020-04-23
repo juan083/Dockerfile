@@ -1,6 +1,6 @@
 Dockerfile创建MySQL8.0
 ====
-    
+
 配置项 | 值  
 -|-
 系统 | centos7
@@ -27,6 +27,9 @@ docker run --name mysql8 \
     -v /etc/my.cnf:/etc/my.cnf \
     -v /etc/my.cnf.d/:/etc/my.cnf.d/ \
     -d mysql8-centos7
+
+
+   docker run --name mysql8 -d centos:7
 ```
 
 #### 进入容器

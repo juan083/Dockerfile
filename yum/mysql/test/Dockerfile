@@ -18,12 +18,9 @@ RUN groupadd mysql && useradd -r -g mysql -s /bin/false mysql \
       $MYSQL_SERVER_PACKAGE \
       $MYSQL_SHELL_PACKAGE \
       libpwquality \
-  && yum clean all
+  && yum clean all \
+  && mysqld --initialize --user=mysql --datadir=/var/lib/mysql >> /var/log/mysqld.log
 
-VOLUME /var/lib/mysql
-
-USER mysql
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 EXPOSE 3306 33060
-CMD ["mysqld"]
+
+CMD ["mysqld", "-u", "mysql"]
