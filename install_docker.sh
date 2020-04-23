@@ -37,3 +37,4 @@ docker-compose -v
 
 echo "[step 4]pull images centos:7..."
 docker pull centos:7
+

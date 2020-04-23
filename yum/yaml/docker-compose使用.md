@@ -26,3 +26,4 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 4. 测试安装是否成功
 docker-compose -v
 ```
+        

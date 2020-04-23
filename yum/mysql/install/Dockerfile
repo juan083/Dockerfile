@@ -11,11 +11,12 @@ ENV TIME_ZOME Asia/Shanghai
 
 # 运行指定命令
 RUN groupadd mysql && useradd -r -g mysql -s /bin/false mysql \
-  && yum -y localinstall https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm \
-  && yum -y install mysql-community-server \
-  && mysqld --initialize --user=mysql --datadir=/var/lib/mysql \
-  && echo "${TIME_ZOME}" > /etc/timezone \
-  && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime
+    && yum -y localinstall https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm \
+    && yum -y install mysql-community-server \
+    && yum clean all \
+    && yum -y remove gcc gcc-c++ make \
+    && echo "${TIME_ZOME}" > /etc/timezone \
+    && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime
 
 # 镜像操作 结束...
 
@@ -27,6 +28,8 @@ EXPOSE 3306
 
 # 指定容器运行时的用户名或UID，后续的RUN也会使用指定的用户。要临时使用管理员权限可以使用sudo。
 USER mysql
+COPY docker-entrypoint.sh /entrypoint.sh
 
 # 容器启动时执行指令
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["mysqld"]

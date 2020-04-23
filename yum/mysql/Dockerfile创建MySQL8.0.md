@@ -1,6 +1,6 @@
 Dockerfile创建MySQL8.0
 ====
-
+    
 配置项 | 值  
 -|-
 系统 | centos7
@@ -52,5 +52,16 @@ mysqld --initialize --user=mysql --datadir=/var/lib/mysql
 
 #### docker-compose
 ```
-
+mysql8:
+    image: mysql8-centos7
+    network_mode: "host"
+    container_name: "mysql8"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/lib/mysql:/var/lib/mysql
+      - /var/log/mysqld.log:/var/log/mysqld.log
+      - /etc/my.cnf:/etc/my.cnf:ro
+      - /etc/my.cnf.d/:/etc/my.cnf.d/:ro
+    command: mysqld
 ```

@@ -38,10 +38,10 @@ services:
           - /etc/redis/:/etc/redis/:ro
           - /var/log/redis/:/var/log/redis/
         command: /usr/local/redis/src/redis-server /etc/redis/redis.conf
-    mysql8:
-        image: mysql8-centos7
-        network_mode: "host"
-        container_name: "mysql8"
+   mysql8:
+       image: mysql8-centos7
+       network_mode: "host"
+       container_name: "mysql8"
         ports:
           - "3306:3306"
         volumes:
@@ -49,4 +49,4 @@ services:
           - /var/log/mysqld.log:/var/log/mysqld.log
           - /etc/my.cnf:/etc/my.cnf:ro
           - /etc/my.cnf.d/:/etc/my.cnf.d/:ro
-        command: mysqld
+    command: mysqld

@@ -12,8 +12,11 @@ ENV TIME_ZOME Asia/Shanghai
 RUN groupadd www && useradd -r -g www -s /bin/false www \
     && echo -e '[nginx]\nname=nginx repo\nbaseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\ngpgcheck=0\nenabled=1' >> /etc/yum.repos.d/nginx.repo \
     && yum -y install nginx \
+    && yum clean all \
+    && yum -y remove gcc gcc-c++ make \
     && echo "${TIME_ZOME}" > /etc/timezone \
     && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime
+
 
 # 声明镜像内服务监听的端口
 # 格式为 EXPOSE port [port2,port3,...]，例如EXPOSE 80这条指令告诉Docker服务器暴露80端口，供容器外部连接使用
