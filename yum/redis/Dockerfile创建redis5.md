@@ -20,7 +20,7 @@ docker run --name redis5 \
     -p 6379:6379 \
     -v /etc/redis/:/etc/redis/:ro \
     -v /var/log/redis/:/var/log/redis/ \
-    -dit redis5-centos7
+    -d redis5-centos7
 ```
 
 #### 进入容器
