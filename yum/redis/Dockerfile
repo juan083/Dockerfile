@@ -39,4 +39,4 @@ RUN groupadd www && useradd -r -g www -s /bin/false www \
 EXPOSE 6379
 
 # 容器启动时执行指令
-CMD ["/usr/local/redis/src/redis-server", "/etc/redis/redis.conf"]
+CMD ["./entrypoint.sh"]

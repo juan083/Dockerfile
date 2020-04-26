@@ -1,14 +1,14 @@
 #!/bin/bash
 
-cd ./redis/install
+path=$(pwd)
+cd ${path}/redis/
 sh ./install_redis.sh
 
-cd ./php/install
+cd ${path}/php/
 sh ./install_php.sh
 
-cd ./nginx/install
+cd ${path}/nginx/
 sh ./install_nginx.sh
 
-cd ./mysql/install
+cd ${path}/mysql/
 sh ./install_mysql.sh
-

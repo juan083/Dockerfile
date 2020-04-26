@@ -7,7 +7,7 @@ Dockerfile创建Redis5
 redis版本 | 5.0.8
 redis配置 | `/etc/redis/redis.conf`
 redis路径 | `/usr/local/redis`
-log | `/var/log/redis/redis.log`  (修改配置文件)
+log | `/var/log/redis/redis.log`(可自定义，修改配置文件的logfile值)
 
 #### 创建镜像
 ```
@@ -34,13 +34,16 @@ docker exec -it redis5 /bin/bash
 DOWNLOAD_URL | 下载链接，默认`http://download.redis.io/releases/redis-5.0.8.tar.gz`
 
 #### 修改redis配置/etc/redis/redis.conf
-##### 外网可以访问
+- 1.外网可以访问
+
 `protected-mode yes` 改成 `protected-mode no`
 
 `bind 127.0.0.1` 改成 `#bind 127.0.0.1`
 
-##### 增加redis的密码
+- 2.增加redis的密码
+
 增加`requirepass 123456`
 
-##### 修改redis的日志
-`logfile ""` 修改 `logfile "/var/log/redis/redis.log"`
+- 3.修改redis的日志
+
+`logfile` 修改 `logfile "/var/log/redis/redis.log"`

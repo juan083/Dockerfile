@@ -22,14 +22,8 @@ docker build -t mysql8-centos7 .
 docker run --name mysql8 \
     --privileged=true \
     -p 3306:3306 \
-    -v /var/lib/mysql:/var/lib/mysql:rw \
     -v /var/log/mysqld.log:/var/log/mysqld.log \
-    -v /etc/my.cnf:/etc/my.cnf \
-    -v /etc/my.cnf.d/:/etc/my.cnf.d/ \
     -d mysql8-centos7
-
-
-   docker run --name mysql8 -d centos:7
 ```
 
 #### 进入容器
@@ -57,7 +51,7 @@ flush privileges;
 
 #### 初始化数据库
 ```
-mysqld --initialize --user=mysql --datadir=/var/lib/mysql
+mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql
 ```
 
 #### docker-compose
@@ -69,9 +63,21 @@ mysql8:
     ports:
       - "3306:3306"
     volumes:
-      - /var/lib/mysql:/var/lib/mysql
       - /var/log/mysqld.log:/var/log/mysqld.log
-      - /etc/my.cnf:/etc/my.cnf:ro
-      - /etc/my.cnf.d/:/etc/my.cnf.d/:ro
     command: mysqld
+```
+
+#### 修改配置文件
+```
+# 将配置文件my.cnf先复制出来
+docker cp {container id}:/etc/my.cnf ./
+
+# 修改my.cnf
+vim my.cnf
+
+# 将配置文件复制到容器内
+docker cp ./my.cnf {contariner id}:/etc/my.cnf
+
+# 重启容器
+docker-compose restart {container id}
 ```
