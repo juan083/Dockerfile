@@ -44,8 +44,15 @@ grep 'temporary password' /var/log/mysqld.log
 
 #### 修改密码
 ```
+# 如果可以连上数据库，可使用以下方式修改
 mysql -uroot -p
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'juan083@163.com';
+
+# 如果链接不上数据库，如提示“ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (111)”
+# 则通过docker exec进去容器修改数据
+docker exec -ti 28612f88596e mysql -u root -p
+update user set host='%' where user = 'root';
+flush privileges;
 ```
 
 #### 初始化数据库
