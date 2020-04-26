@@ -15,13 +15,16 @@ fi
 
 flag=$(docker ps -a | grep -w ${container_name})
 if [ -z "${flag}" ]; then
-    cp -rf ./etc/ /
-
-    docker run --name ${container_name} \
-        --privileged=true \
-        -p 3306:3306 \
-        -v /var/log/mysqld.log:/var/log/mysqld.log \
-        -d ${image_name}
+    if [ ${1} == 1 ]; then
+        cp -rf ./etc/ /
+        docker run --name ${container_name} \
+            --privileged=true \
+            -p 3306:3306 \
+            -v /var/log/mysqld.log:/var/log/mysqld.log \
+            -d ${image_name}
+    else
+        echo "do not create [${container_name}]"
+    fi
 else
     echo "container [${container_name}] is exist"
 fi
@@ -29,4 +32,3 @@ fi
 echo "[end]......"
 docker images
 docker ps -a
-

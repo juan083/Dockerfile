@@ -2,13 +2,13 @@
 
 path=$(pwd)
 cd ${path}/redis/
-sh ./install_redis.sh $1
+sh ./install_redis.sh
 
 cd ${path}/php/
-sh ./install_php.sh $1
+sh ./install_php.sh
 
 cd ${path}/nginx/
-sh ./install_nginx.sh $1
+sh ./install_nginx.sh
 
 cd ${path}/mysql/
-sh ./install_mysql.sh $1
+sh ./install_mysql.sh
