@@ -23,7 +23,7 @@ services:
         volumes:
           - /etc/php.int:/etc/php.int:ro
           - /etc/php.d/:/etc/php.d/:ro
-          - //etc/php-fpm.conf:/etc/php-fpm.conf:ro
+          - /etc/php-fpm.conf:/etc/php-fpm.conf:ro
           - /etc/php-fpm.d/:/etc/php-fpm.d/:ro
           - /var/log/php-fpm/:/var/log/php-fpm/
         command: php-fpm

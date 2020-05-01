@@ -24,12 +24,12 @@ RUN groupadd mysql && useradd -r -g mysql -s /bin/false mysql \
   && echo "${TIME_ZOME}" > /etc/timezone \
   && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime
 
-COPY entrypoint.sh /tmp/mysql/entrypoint.sh
-RUN chmod 777 /tmp/mysql/entrypoint.sh
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod 777 ./entrypoint.sh
 
 EXPOSE 3306 33060
 
 USER mysql
 
-ENTRYPOINT ["/tmp/mysql/entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
 CMD ["mysqld"]
