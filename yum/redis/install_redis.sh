@@ -13,8 +13,8 @@ flag=$(docker ps -a | grep ${container_name})
 if [[ -z "${flag}" ]]; then
     if [[ ${1} == 1 ]]; then
     	cp -rf ./etc/ /
-        mkdir -p /var/local/redis
-        cp -rf ./src /var/local/redis
+      mkdir -p /var/local/redis
+      cp -rf ./src /var/local/redis
     	docker run --name ${container_name}  \
             -p 6379:6379 \
             -v /etc/redis/:/etc/redis/:ro \

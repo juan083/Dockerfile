@@ -38,5 +38,8 @@ RUN groupadd www && useradd -r -g www -s /bin/false www \
 # 使用-p(小写)可以具体指定使用哪个本地的端口来映射对外开放的端口，如：-p 80:80，-p [宿主机端口]：[容器端口]
 EXPOSE 6379
 
+COPY entrypoint.sh ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
+
 # 容器启动时执行指令
 CMD ["./entrypoint.sh"]
