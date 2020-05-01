@@ -3,15 +3,15 @@ image_name="php72-centos7"
 container_name="php72"
 
 flag=$(docker images | grep ${image_name})
-if [ -z "${flag}" ]; then
+if [[ -z "${flag}" ]]; then
     docker build -t ${image_name} .
 else
 	echo "image [${image_name}] is exist"
 fi
 
 flag=$(docker ps -a | grep ${container_name})
-if [ -z "${flag}" ]; then
-    if [ ${1} == 1 ]; then
+if [[ -z "${flag}" ]]; then
+    if [[ ${1} == 1 ]]; then
     	cp -rf ./etc/ /
     	docker run --name ${container_name} \
             -p 9000:9000 \

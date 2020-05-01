@@ -3,15 +3,15 @@ image_name="redis5-centos7"
 container_name="redis5"
 
 flag=$(docker images | grep ${image_name})
-if [ -z "${flag}" ]; then
+if [[ -z "${flag}" ]]; then
     docker build -t ${image_name} .
 else
 	echo "image [${image_name}] is exist"
 fi
 
 flag=$(docker ps -a | grep ${container_name})
-if [ -z "${flag}" ]; then
-    if [ ${1} == 1 ]; then
+if [[ -z "${flag}" ]]; then
+    if [[ ${1} == 1 ]]; then
     	cp -rf ./etc/ /
         mkdir -p /var/local/redis
         cp -rf ./src /var/local/redis
@@ -22,7 +22,7 @@ if [ -z "${flag}" ]; then
             -d ${image_name}
     else
         echo "do not create [${container_name}]"
-    fi        
+    fi
 else
     echo "container [${container_name}] is exist"
 fi
