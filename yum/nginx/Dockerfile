@@ -25,7 +25,7 @@ RUN groupadd www && useradd -r -g www -s /bin/false www \
 EXPOSE 80 90 443 8080
 
 COPY entrypoint.sh ./entrypoint.sh
-RUN chmod 777 ./entrypoint.sh
+RUN chmod +x ./entrypoint.sh
 
 # 容器启动时执行指令
 CMD ["./entrypoint.sh"]

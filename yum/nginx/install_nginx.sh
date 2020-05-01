@@ -21,7 +21,8 @@ if [[ -z "${flag}" ]]; then
             -p 8080:8080 \
             -v /var/www/:/var/www/ \
             -v /var/log/nginx/:/var/log/nginx/ \
-            -v /etc/nginx/:/etc/nginx/:ro \
+            -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro \
+            -v /etc/nginx/conf.d/:/etc/nginx/conf.d/:ro \
             -d ${image_name}
     else
         echo "do not create [${container_name}]"
