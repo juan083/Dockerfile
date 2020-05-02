@@ -29,7 +29,4 @@ RUN chmod 777 ./entrypoint.sh
 
 EXPOSE 3306 33060
 
-USER mysql
-
-ENTRYPOINT ["./entrypoint.sh"]
-CMD ["mysqld"]
+CMD ["./entrypoint.sh"]
