@@ -25,6 +25,7 @@ docker run --name php72 \
 -v //etc/php-fpm.conf:/etc/php-fpm.conf:ro \
 -v /etc/php-fpm.d/:/etc/php-fpm.d/:ro \
 -v /var/log/php-fpm/:/var/log/php-fpm/ \
+-v /var/www/:/var/www/ \
 -dit php72-centos7
 ```
 
