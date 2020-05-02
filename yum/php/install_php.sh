@@ -15,7 +15,7 @@ if [[ -z "${flag}" ]]; then
     	cp -rf ./etc/ /
     	docker run --name ${container_name} \
             -p 9000:9000 \
-            -v /etc/php.int:/etc/php.int:ro \
+            -v /etc/php.ini:/etc/php.ini:ro \
             -v /etc/php.d/:/etc/php.d/:ro \
             -v //etc/php-fpm.conf:/etc/php-fpm.conf:ro \
             -v /etc/php-fpm.d/:/etc/php-fpm.d/:ro \
