@@ -20,6 +20,7 @@ if [[ -z "${flag}" ]]; then
             -v //etc/php-fpm.conf:/etc/php-fpm.conf:ro \
             -v /etc/php-fpm.d/:/etc/php-fpm.d/:ro \
             -v /var/log/php-fpm/:/var/log/php-fpm/ \
+            -v /var/www/:/var/www/ \
             -d ${image_name}
     else
         echo "do not create [${container_name}]"
