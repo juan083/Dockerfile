@@ -12,6 +12,7 @@ ENV TIME_ZOME Asia/Shanghai
 # pecl search xxx, pecl install xxx
 RUN groupadd www \
     && useradd -r -g www -s /bin/false www \
+    && yum -y install gcc gcc-c++ make \
     && yum install -y epel-release \
     && rpm -Uvh https://mirror.webtatic.com/yum/el7/webtatic-release.rpm \
     && yum -y install php72w php72w-cli php72w-fpm php72w-common php72w-devel php72w-embedded php72w-gd php72w-mbstring php72w-mysqlnd php72w-opcache php72w-pdo php72w-xml php72w-pecl-mongodb \
