@@ -11,7 +11,7 @@ yum remove docker \
                   docker-engine
 
 echo "[step 2]update yum......"
-yum update -y
+#yum update -y
 
 echo "[step 3]install docker......"
 yum install -y yum-utils \
@@ -37,4 +37,3 @@ docker-compose -v
 
 echo "[step 4]pull images centos:7..."
 docker pull centos:7
-

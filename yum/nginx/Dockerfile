@@ -9,7 +9,9 @@ MAINTAINER juan083@163.com
 # 指定环境变量
 ENV TIME_ZOME Asia/Shanghai
 
-RUN groupadd www && useradd -r -g www -s /bin/false www \
+RUN groupadd www \
+    && useradd -r -g www -s /bin/false www \
+    && yum -y install gcc gcc-c++ make \
     && echo -e '[nginx]\nname=nginx repo\nbaseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\ngpgcheck=0\nenabled=1' >> /etc/yum.repos.d/nginx.repo \
     && yum -y install nginx \
     && yum clean all \
@@ -25,7 +27,7 @@ RUN groupadd www && useradd -r -g www -s /bin/false www \
 EXPOSE 80 90 443 8080
 
 COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x ./entrypoint.sh
+RUN chmod 777 ./entrypoint.sh
 
 # 容器启动时执行指令
 CMD ["./entrypoint.sh"]
