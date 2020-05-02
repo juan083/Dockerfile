@@ -11,11 +11,9 @@ ENV TIME_ZOME Asia/Shanghai
 
 RUN groupadd www \
     && useradd -r -g www -s /bin/false www \
-    && yum -y install gcc gcc-c++ make \
     && echo -e '[nginx]\nname=nginx repo\nbaseurl=http://nginx.org/packages/centos/\$releasever/\$basearch/\ngpgcheck=0\nenabled=1' >> /etc/yum.repos.d/nginx.repo \
     && yum -y install nginx \
     && yum clean all \
-    && yum -y remove gcc gcc-c++ make \
     && echo "${TIME_ZOME}" > /etc/timezone \
     && ln -sf /usr/share/zoneinfo/${TIME_ZOME} /etc/localtime
 
