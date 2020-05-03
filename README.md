@@ -2,15 +2,15 @@
 ====
 
 ### 应用版本
-应用 | 版本
-- | -
-docker | 19.03.8 |
-docker-compose | 1.25.5 |
-centos | centos:7 |
-nginx | 1.18.0 |
-mysql | 8.0.19 |
-php | 7.2 |
-redis | 5.0.8 |
+应用 | 版本  
+-|-
+docker | 19.03.8
+docker-compose | 1.25.5
+centos | centos:7
+nginx | 1.18.0
+mysql | 8.0.19
+php | 7.2
+redis | 5.0.8
 
 ### 一键部署脚本
 
