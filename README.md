@@ -22,6 +22,9 @@ sh install_docker.sh
 
 #### 2.一键安装lnmpr环境
 [install_lnmpr.sh](./yum/install_lnmpr.sh)
+```
+sh install_lnmpr.sh
+```
 
 **lnmpr环境**: 即基于centos7配置nginx、mysql、php、redis的环境
 
