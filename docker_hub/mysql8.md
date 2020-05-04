@@ -14,22 +14,17 @@ pid | `/var/run/mysqld/mysqld.pid`
 
 ### Dockerfile
 
-[Redis Dockerfile](https://github.com/juan083/Dockerfile/tree/master/redis/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/redis/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/redis/Dockerfile)
+[mysql Dockerfile](https://github.com/juan083/Dockerfile/tree/master/mysql/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/mysql/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/mysql/Dockerfile)
 
 ### 部署步骤
+
 #### 1.拉取文件
 ```
 git clone https://github.com/juan083/Dockerfile
 cd ./Dockerfile/mysql
 ```
 
-#### 2.本地build镜像或从Docker Hub拉取镜像
-##### 本地build镜像
-```
-docker build -t mysql8-centos7 .
-```
-
-##### 从Docker Hub拉取镜像
+#### 2.从Docker Hub拉取镜像
 ```
 docker pull juan083/mysql8-mini-centos7
 ```
@@ -45,7 +40,7 @@ cp -rf ./Dockerfile/mysql/etc/ /
 docker-compose -f docker_hub_lnmpr.yml up -d mysql8
 ```
 
-[mysql8.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/mysql8.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/mysql8.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/mysql8.yml)
+[docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml)
 
 ```
 mysql8:

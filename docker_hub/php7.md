@@ -11,6 +11,10 @@ fpm配置 | `/etc/php-fpm.conf`
 fpm配置 | `/etc/php-fpm.d/`
 log | `/var/log/php-fpm/`
 
+### Dockerfile
+
+[php Dockerfile](https://github.com/juan083/Dockerfile/tree/master/php/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/php/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/php/Dockerfile)
+
 ### 部署步骤
 #### 1.拉取文件
 ```
@@ -18,13 +22,7 @@ git clone https://github.com/juan083/Dockerfile
 cd ./Dockerfile/php
 ```
 
-#### 2.本地build镜像或从Docker Hub拉取镜像
-##### 本地build镜像
-```
-docker build -t php72-centos7 .
-```
-
-##### 从Docker Hub拉取镜像
+#### 2.从Docker Hub拉取镜像
 ```
 docker pull juan083/php72-centos7
 ```
@@ -40,7 +38,7 @@ cp -rf ./Dockerfile/php/etc/ /
 docker-compose -f docker_hub_lnmpr.yml up -d php72
 ```
 
-[php72.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/php72.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/php72.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/php72.yml)
+[docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml)
 
 ```
 version: '3'

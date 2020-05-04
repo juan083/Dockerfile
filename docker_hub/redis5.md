@@ -20,13 +20,7 @@ git clone https://github.com/juan083/Dockerfile
 cd ./Dockerfile/redis
 ```
 
-#### 2.本地build镜像或从Docker Hub拉取镜像
-##### 本地build镜像
-```
-docker build -t redis5-centos7 .
-```
-
-##### 从Docker Hub拉取镜像
+#### 2.从Docker Hub拉取镜像
 ```
 docker pull juan083/redis5-centos7:1.0
 ```
@@ -41,7 +35,9 @@ cp -rf ./Dockerfile/redis/etc/ /
 ```
 docker-compose -f docker_hub_lnmpr.yml up -d redis5
 ```
-[redis5.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/redis5.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/redis5.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/redis5.yml)
+
+[docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml)
+
 ```
 redis5:
     image: juan083/redis5-centos7

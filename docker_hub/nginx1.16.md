@@ -11,6 +11,10 @@ nginx配置 | `/etc/nginx/nginx.conf`
 错误日志 | `/var/log/nginx/error.log`
 web项目 | `/var/www/`
 
+### Dockerfile
+
+[nginx Dockerfile](https://github.com/juan083/Dockerfile/tree/master/nginx/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/nginx/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/nginx/Dockerfile)
+
 ### 部署步骤
 #### 1.拉取文件
 ```
@@ -18,13 +22,7 @@ git clone https://github.com/juan083/Dockerfile
 cd ./Dockerfile/nginx
 ```
 
-#### 2.本地build镜像或从Docker Hub拉取镜像
-##### 本地build镜像
-```
-docker build -t nginx1.16-centos7 .
-```
-
-##### 从Docker Hub拉取镜像
+#### 2.从Docker Hub拉取镜像
 ```
 docker pull juan083/nginx1.16-centos7
 ```
@@ -40,7 +38,7 @@ cp -rf ./Dockerfile/nginx/etc/ /
 docker-compose -f docker_hub_lnmpr.yml up -d nginx1.16
 ```
 
-[nginx1.16.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/nginx1.16.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/nginx1.16.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/nginx1.16.yml)
+[docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml)
 
 ```
 nginx1.16:
