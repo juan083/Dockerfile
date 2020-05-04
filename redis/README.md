@@ -34,16 +34,16 @@ docker exec -it redis5 /bin/bash
 DOWNLOAD_URL | 下载链接，默认`http://download.redis.io/releases/redis-5.0.8.tar.gz`
 
 #### 修改redis配置/etc/redis/redis.conf
-- 1.外网可以访问
+##### 1.外网可以访问
 
 `protected-mode yes` 改成 `protected-mode no`
 
 `bind 127.0.0.1` 改成 `#bind 127.0.0.1`
 
-- 2.增加redis的密码
+##### 2.增加redis的密码
 
 增加`requirepass 123456`
 
-- 3.修改redis的日志
+##### 3.修改redis的日志
 
 `logfile` 修改 `logfile "/var/log/redis/redis.log"`
