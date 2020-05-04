@@ -28,8 +28,8 @@ MySQL安装完成后，还需修改root密码以及登录ip的限制
 ```
 docker exec -ti 28612f88596e mysql -u root -p
 use mysql;
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
 update user set host='%' where user = 'root';
-ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
 flush privileges;
 ```
 
