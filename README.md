@@ -24,6 +24,16 @@ cd mysql
 sh install_mysql.sh 1
 ```
 
+MySQL安装完成后，还需修改root密码以及登录ip的限制
+```
+docker exec -ti 28612f88596e mysql -u root -p
+use mysql;
+update user set host='%' where user = 'root';
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '123456';
+flush privileges;
+```
+
+
 #### 2. Dockerfile创建 Nginx1.16 镜像
 [Dockerfile创建nginx1.16](./Dockerfile创建nginx1.16.md)
 ##### 安装命令

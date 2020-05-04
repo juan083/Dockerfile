@@ -16,7 +16,7 @@ services:
           - /etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
         command: ./entrypoint.sh
     php72:
-        image:php72-centos7
+        image: php72-centos7
         network_mode: "host"
         container_name: "php72"
         ports:
@@ -40,12 +40,12 @@ services:
           - /etc/redis/:/etc/redis/:ro
           - /var/log/redis/:/var/log/redis/
         command: ./entrypoint.sh
-   mysql8:
-       image: mysql8-centos7
-       network_mode: "host"
-       container_name: "mysql8"
+    mysql8:
+        image: mysql8-mini-centos7
+        network_mode: "host"
+        container_name: "mysql8"
         ports:
           - "3306:3306"
         volumes:
           - /var/log/mysqld.log:/var/log/mysqld.log
-    command: ./entrypoint.sh
+        command: ./entrypoint.sh
