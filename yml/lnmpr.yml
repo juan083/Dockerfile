@@ -2,7 +2,6 @@ version: '3'
 services:
     nginx1.16:
         image: nginx1.16-centos7
-        network_mode: "host"
         container_name: "nginx1.16"
         ports:
           - "80:80"
@@ -17,7 +16,6 @@ services:
         command: ./entrypoint.sh
     php72:
         image: php72-centos7
-        network_mode: "host"
         container_name: "php72"
         ports:
           - "9000:9000"
@@ -31,7 +29,6 @@ services:
         command: ./entrypoint.sh
     redis5:
         image: redis5-centos7
-        network_mode: "host"
         container_name: "redis5"
         ports:
           - "6379:6379"
@@ -42,7 +39,6 @@ services:
         command: ./entrypoint.sh
     mysql8:
         image: mysql8-mini-centos7
-        network_mode: "host"
         container_name: "mysql8"
         ports:
           - "3306:3306"
