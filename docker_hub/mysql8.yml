@@ -1,14 +1,10 @@
 version: '3'
 services:
     mysql8:
-        image: mysql:8.0.19
-        network_mode: "host"
+        image: juan083/mysql8-mini-centos7
         container_name: "mysql8"
         ports:
           - "3306:3306"
         volumes:
-          - /var/lib/mysql:/var/lib/mysql
           - /var/log/mysqld.log:/var/log/mysqld.log
-          - /etc/my.cnf:/etc/my.cnf:ro
-          - /etc/my.cnf.d/:/etc/my.cnf.d/:ro
-        command: mysqld
+        command: ./entrypoint.sh

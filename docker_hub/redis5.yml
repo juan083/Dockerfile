@@ -1,0 +1,12 @@
+version: '3'
+services:
+    redis5:
+        image: juan083/redis5-centos7
+        container_name: "redis5"
+        ports:
+          - "6379:6379"
+          - "6380:6380"
+        volumes:
+          - /etc/redis/:/etc/redis/:ro
+          - /var/log/redis/:/var/log/redis/
+        command: ./entrypoint.sh
