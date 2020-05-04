@@ -1,7 +1,7 @@
 version: '3'
 services:
     nginx1.16:
-        image: nginx:1.16.1
+        image: nginx1.16-centos7
         network_mode: "host"
         container_name: "nginx1.16"
         ports:
@@ -12,10 +12,11 @@ services:
         volumes:
           - /var/www:/var/www/
           - /var/log/nginx/:/var/log/nginx/
-          - /etc/nginx/:/etc/nginx/:ro
-        command: nginx -g "daemon off;"
+          - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+          - /etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
+        command: ./entrypoint.sh
     php72:
-        image: php:7.2.30
+        image:php72-centos7
         network_mode: "host"
         container_name: "php72"
         ports:
@@ -23,12 +24,13 @@ services:
         volumes:
           - /etc/php.int:/etc/php.int:ro
           - /etc/php.d/:/etc/php.d/:ro
-          - //etc/php-fpm.conf:/etc/php-fpm.conf:ro
+          - /etc/php-fpm.conf:/etc/php-fpm.conf:ro
           - /etc/php-fpm.d/:/etc/php-fpm.d/:ro
           - /var/log/php-fpm/:/var/log/php-fpm/
-        command: php-fpm
+          - /var/www/:/var/www/
+        command: ./entrypoint.sh
     redis5:
-        image: redis:5.0.9
+        image: redis5-centos7
         network_mode: "host"
         container_name: "redis5"
         ports:
@@ -37,16 +39,13 @@ services:
         volumes:
           - /etc/redis/:/etc/redis/:ro
           - /var/log/redis/:/var/log/redis/
-        command: /usr/local/redis/src/redis-server /etc/redis/redis.conf
-    mysql8:
-        image: mysql:8.0.19
-        network_mode: "host"
-        container_name: "mysql8"
+        command: ./entrypoint.sh
+   mysql8:
+       image: mysql8-centos7
+       network_mode: "host"
+       container_name: "mysql8"
         ports:
           - "3306:3306"
         volumes:
-          - /var/lib/mysql:/var/lib/mysql
           - /var/log/mysqld.log:/var/log/mysqld.log
-          - /etc/my.cnf:/etc/my.cnf:ro
-          - /etc/my.cnf.d/:/etc/my.cnf.d/:ro
-        command: mysqld
+    command: ./entrypoint.sh

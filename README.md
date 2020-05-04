@@ -14,12 +14,14 @@ redis | 5.0.8
 
 ### 使用Dockerfile创建镜像
 
+自动安装脚本`install_xxx.sh`的参数`1`，表示同时构建容器
+
 #### 1. Dockerfile创建 MySQL8.0 镜像
 [Dockerfile创建MySQL8.0](./Dockerfile创建MySQL8.0.md)
 ##### 安装命令
 ```
 cd mysql
-sh install_mysql.sh
+sh install_mysql.sh 1
 ```
 
 #### 2. Dockerfile创建 Nginx1.16 镜像
@@ -27,7 +29,7 @@ sh install_mysql.sh
 ##### 安装命令
 ```
 cd nginx
-sh install_nginx.sh
+sh install_nginx.sh 1
 ```
 
 #### 3. Dockerfile创建 PHP7.2 镜像
@@ -35,7 +37,7 @@ sh install_nginx.sh
 ##### 安装命令
 ```
 cd php
-sh install_php.sh
+sh install_php.sh 1
 ```
 
 #### 4. Dockerfile创建 Redis5.0 镜像
@@ -62,9 +64,10 @@ sh install_docker.sh
 
 #### 2.一键部署lnmpr环境
 **lnmpr环境**: 即基于centos7配置nginx、mysql、php、redis的环境
+
 [install_lnmpr.sh](./install_lnmpr.sh)
 ```
-sh install_docker.sh
+sh install_docker.sh 1
 ```
 
 #### 3.Docker Hub生成的镜像
