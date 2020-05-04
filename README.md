@@ -109,6 +109,12 @@ docker push 刚打的tag名称:版本
 docker push juan083/redis5-centos7:1.0
 ```
 
+#### 4.一键部署Docker Hub镜像
+```
+cd docker_hub
+docker-compose -f docker_hub_lnmpr.yml up -d
+```
+
 以下是提交到Docker Hub到镜像
 ##### [juan083/mysql8-mini-centos7](https://hub.docker.com/repository/docker/juan083/mysql8-mini-centos7)
 ##### [juan083/nginx1.16-centos7](https://hub.docker.com/repository/docker/juan083/nginx1.16-centos7)
