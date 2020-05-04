@@ -37,28 +37,26 @@ cp -rf ./Dockerfile/nginx/etc/ /
 #### 4.启动容器
 ##### 使用docker-compose构建容器
 ```
-docker-compose -f nginx1.16.yml up -d nginx1.16
+docker-compose -f docker_hub_lnmpr.yml up -d nginx1.16
 ```
 
 [nginx1.16.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/nginx1.16.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/nginx1.16.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/nginx1.16.yml)
 
 ```
-version: '3'
-services:
-    nginx1.16:
-        image: juan083/nginx1.16-centos7
-        container_name: "nginx1.16"
-        ports:
-          - "80:80"
-          - "90:90"
-          - "443:443"
-          - "8080:8080"
-        volumes:
-          - /var/www:/var/www/
-          - /var/log/nginx/:/var/log/nginx/
-          - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-          - /etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
-        command: ./entrypoint.sh
+nginx1.16:
+    image: juan083/nginx1.16-centos7
+    container_name: "nginx1.16"
+    ports:
+      - "80:80"
+      - "90:90"
+      - "443:443"
+      - "8080:8080"
+    volumes:
+      - /var/www:/var/www/
+      - /var/log/nginx/:/var/log/nginx/
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/nginx/conf.d/:/etc/nginx/conf.d/:ro
+    command: ./entrypoint.sh
 ```
 
 ##### docker命令构建容器

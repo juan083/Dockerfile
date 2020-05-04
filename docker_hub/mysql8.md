@@ -42,22 +42,20 @@ cp -rf ./Dockerfile/mysql/etc/ /
 #### 4.启动容器
 ##### 使用docker-compose构建容器
 ```
-docker-compose -f mysql8.yml up -d mysql8
+docker-compose -f docker_hub_lnmpr.yml up -d mysql8
 ```
 
 [mysql8.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/mysql8.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/mysql8.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/mysql8.yml)
 
 ```
-version: '3'
-services:
-    mysql8:
-        image: juan083/mysql8-mini-centos7
-        container_name: "mysql8"
-        ports:
-          - "3306:3306"
-        volumes:
-          - /var/log/mysqld.log:/var/log/mysqld.log
-        command: ./entrypoint.sh
+mysql8:
+    image: juan083/mysql8-mini-centos7
+    container_name: "mysql8"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /var/log/mysqld.log:/var/log/mysqld.log
+    command: ./entrypoint.sh
 ```
 
 ##### docker命令构建容器

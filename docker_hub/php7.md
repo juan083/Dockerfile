@@ -37,7 +37,7 @@ cp -rf ./Dockerfile/php/etc/ /
 #### 4.启动容器
 ##### 使用docker-compose构建容器
 ```
-docker-compose -f php72.yml up -d php72
+docker-compose -f docker_hub_lnmpr.yml up -d php72
 ```
 
 [php72.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/php72.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/php72.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/php72.yml)
@@ -45,19 +45,19 @@ docker-compose -f php72.yml up -d php72
 ```
 version: '3'
 services:
-    php72:
-        image: juan083/php72-centos7
-        container_name: "php72"
-        ports:
-          - "9000:9000"
-        volumes:
-          - /etc/php.int:/etc/php.int:ro
-          - /etc/php.d/:/etc/php.d/:ro
-          - /etc/php-fpm.conf:/etc/php-fpm.conf:ro
-          - /etc/php-fpm.d/:/etc/php-fpm.d/:ro
-          - /var/log/php-fpm/:/var/log/php-fpm/
-          - /var/www/:/var/www/
-        command: ./entrypoint.sh
+php72:
+    image: juan083/php72-centos7
+    container_name: "php72"
+    ports:
+      - "9000:9000"
+    volumes:
+      - /etc/php.int:/etc/php.int:ro
+      - /etc/php.d/:/etc/php.d/:ro
+      - /etc/php-fpm.conf:/etc/php-fpm.conf:ro
+      - /etc/php-fpm.d/:/etc/php-fpm.d/:ro
+      - /var/log/php-fpm/:/var/log/php-fpm/
+      - /var/www/:/var/www/
+    command: ./entrypoint.sh
 ```
 
 ##### docker命令构建容器

@@ -39,22 +39,20 @@ cp -rf ./Dockerfile/redis/etc/ /
 #### 4.启动容器
 ##### 使用docker-compose构建容器
 ```
-docker-compose -f redis.yml up -d redis5
+docker-compose -f docker_hub_lnmpr.yml up -d redis5
 ```
 [redis5.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/redis5.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/redis5.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/redis5.yml)
 ```
-version: '3'
-services:
-    redis5:
-        image: juan083/redis5-centos7
-        container_name: "redis5"
-        ports:
-          - "6379:6379"
-          - "6380:6380"
-        volumes:
-          - /etc/redis/:/etc/redis/:ro
-          - /var/log/redis/:/var/log/redis/
-        command: ./entrypoint.sh
+redis5:
+    image: juan083/redis5-centos7
+    container_name: "redis5"
+    ports:
+      - "6379:6379"
+      - "6380:6380"
+    volumes:
+      - /etc/redis/:/etc/redis/:ro
+      - /var/log/redis/:/var/log/redis/
+    command: ./entrypoint.sh
 ```
 ##### docker命令构建容器
 ```
