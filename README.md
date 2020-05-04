@@ -77,7 +77,7 @@ sh install_docker.sh
 
 [install_lnmpr.sh](./install_lnmpr.sh)
 ```
-sh install_docker.sh 1
+sh install_lnmpr.sh 1
 ```
 
 #### 3.Docker Hub生成的镜像
