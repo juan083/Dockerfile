@@ -1,6 +1,8 @@
 Dockerfile创建Redis5
 ====
 
+如果你觉得对你有帮助，请给颗星星✨鼓励下 [https://github.com/juan083/Dockerfile]
+
 配置项 | 值  
 -|-
 系统 | centos7
@@ -13,11 +15,17 @@ log | `/var/log/redis/redis.log`(可自定义，修改配置文件的logfile值)
 
 [Redis Dockerfile](https://github.com/juan083/Dockerfile/tree/master/redis/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/redis/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/redis/Dockerfile)
 
+### 部署脚本
+[部署脚本 https://github.com/juan083/Dockerfile/docker_hub/install.sh](https://github.com/juan083/Dockerfile/docker_hub/install.sh)
+
+```
+sh install.sh redis
+```
+
 ### 部署步骤
 #### 1.拉取文件
 ```
 git clone https://github.com/juan083/Dockerfile
-cd ./Dockerfile/redis
 ```
 
 #### 2.从Docker Hub拉取镜像
@@ -50,6 +58,7 @@ redis5:
       - /var/log/redis/:/var/log/redis/
     command: ./entrypoint.sh
 ```
+
 ##### docker命令构建容器
 ```
 docker run --name redis5 \
@@ -83,3 +92,5 @@ DOWNLOAD_URL | 下载链接，默认`http://download.redis.io/releases/redis-5.0
 ##### 3.修改redis的日志
 
 `logfile` 修改 `logfile "/var/log/redis/redis.log"`
+
+如果你觉得对你有帮助，请给颗星星✨鼓励下 [https://github.com/juan083/Dockerfile]

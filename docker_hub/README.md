@@ -1,6 +1,8 @@
 部署
 ====
 
+如果你觉得对你有帮助，请给颗星星✨鼓励下
+
 ### 步骤
 #### 1.拉取Docker Hub镜像
 ```
@@ -24,3 +26,5 @@ docker-compose -f docker_hub_lnmpr.yml up -d mysql8
 ```
 sh install.sh mysql
 ```
+
+如果你觉得对你有帮助，请给颗星星✨鼓励下

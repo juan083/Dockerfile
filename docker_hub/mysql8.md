@@ -1,6 +1,8 @@
 Dockerfile创建MySQL8.0
 ====
 
+如果你觉得对你有帮助，请给颗星星✨鼓励下[https://github.com/juan083/Dockerfile]
+
 配置项 | 值  
 -|-
 系统 | centos7
@@ -16,12 +18,17 @@ pid | `/var/run/mysqld/mysqld.pid`
 
 [mysql Dockerfile](https://github.com/juan083/Dockerfile/tree/master/mysql/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/mysql/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/mysql/Dockerfile)
 
-### 部署步骤
+### 部署脚本
+[部署脚本 https://github.com/juan083/Dockerfile/docker_hub/install.sh](https://github.com/juan083/Dockerfile/docker_hub/install.sh)
 
+```
+sh install.sh mysql
+```
+
+### 部署步骤
 #### 1.拉取文件
 ```
 git clone https://github.com/juan083/Dockerfile
-cd ./Dockerfile/mysql
 ```
 
 #### 2.从Docker Hub拉取镜像
@@ -121,3 +128,5 @@ docker cp ./my.cnf {contariner id}:/etc/my.cnf
 # 重启容器
 docker-compose restart {container id}
 ```
+
+如果你觉得对你有帮助，请给颗星星✨鼓励下 [https://github.com/juan083/Dockerfile]

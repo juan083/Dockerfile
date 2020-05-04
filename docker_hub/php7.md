@@ -1,6 +1,8 @@
 Dockerfile创建php7
 ====
 
+如果你觉得对你有帮助，请给颗星星✨鼓励下 [https://github.com/juan083/Dockerfile]
+
 配置项 | 值  
 -|-
 系统 | centos7
@@ -15,16 +17,22 @@ log | `/var/log/php-fpm/`
 
 [php Dockerfile](https://github.com/juan083/Dockerfile/tree/master/php/Dockerfile) : [https://github.com/juan083/Dockerfile/tree/master/php/Dockerfile](https://github.com/juan083/Dockerfile/tree/master/php/Dockerfile)
 
+### 部署脚本
+[部署脚本 https://github.com/juan083/Dockerfile/docker_hub/install.sh](https://github.com/juan083/Dockerfile/docker_hub/install.sh)
+
+```
+sh install.sh php
+```
+
 ### 部署步骤
 #### 1.拉取文件
 ```
 git clone https://github.com/juan083/Dockerfile
-cd ./Dockerfile/php
 ```
 
 #### 2.从Docker Hub拉取镜像
 ```
-docker pull juan083/php72-centos7
+docker pull juan083/php72-centos7:1.0
 ```
 
 #### 3.复制配置文件
@@ -41,8 +49,6 @@ docker-compose -f docker_hub_lnmpr.yml up -d php72
 [docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml): [https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml](https://github.com/juan083/Dockerfile/blob/master/docker_hub/docker_hub_lnmpr.yml)
 
 ```
-version: '3'
-services:
 php72:
     image: juan083/php72-centos7
     container_name: "php72"
@@ -188,3 +194,5 @@ php72w-intl
 php72w-memcached
 php72w-pecl-mongodb
 ```
+
+如果你觉得对你有帮助，请给颗星星✨鼓励下 [https://github.com/juan083/Dockerfile]
