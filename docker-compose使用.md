@@ -19,7 +19,7 @@ docker-compose -v
 
 ### 常用命令
 命令 | 作用
-- |-  
+-|- 
 docker-compose up -d xxx | 以守护进程模式，构建容器xxx运行加-d选项
 docker-compose -f YML文件 up -d xxx | 指定配置文件
 docker-compose ps -a | 显示所有容器
